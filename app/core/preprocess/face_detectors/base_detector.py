@@ -25,7 +25,7 @@ class BaseFaceDetector(ABC):
         # Detect faces
         faces = self.detect_faces(image)
 
-        h, w = image.shape
+        h, w, _ = image.shape
         cx, cy = w/2, h/2
 
         # Sort by are descending
@@ -41,6 +41,6 @@ class BaseFaceDetector(ABC):
             return (((bx + bw/2) - cx)**2 + ((by + bh/2) - cy)**2)**0.5
 
         main_face = min(candidates, key=distance_to_center)
-        return main_face
+        return [main_face]
 
 

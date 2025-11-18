@@ -1,6 +1,7 @@
 import mediapipe as mp
 import cv2
-from base_detector import BaseFaceDetector
+
+from .base_detector import BaseFaceDetector
 
 class MediaPipeFaceDetector(BaseFaceDetector):
 
@@ -24,8 +25,3 @@ class MediaPipeFaceDetector(BaseFaceDetector):
                 bw, by = int(box.width * w), int(box.height * h)
                 faces.append([x, y, bw, by])
         return faces
-
-
-    def detect_main_face(self, image):
-        faces = self.detect_faces(image)
-        return super().detect_main_face(faces)
