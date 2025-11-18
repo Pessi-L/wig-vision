@@ -4,26 +4,28 @@ class BaseFaceDetector(ABC):
     @abstractmethod
     def detect_faces(self, image, mode='image'):
         """
-        :param image: numpy array
+        :param image:
         :param mode: optional modes: image, video, live_stream
         :return:
         """
         pass
 
-    def detect_main_face(self, faces, img_shape):
+    def detect_main_face(self, image):
         """
         Detects the main face in an image
 
         Logic:
+        - Detect faces
         - Pick the largest bounding box by area.
         - If multiple boxes are similar in size, choose the one closest to the image center.
 
-        :param faces: numpy array
-        :param img_shape: (x, y)
-        :return:
+        :param image: numpy array
+        :return: box of the main face
         """
+        # Detect faces
+        faces = self.detect_faces(image)
 
-        h, w = img_shape
+        h, w = image.shape
         cx, cy = w/2, h/2
 
         # Sort by are descending
